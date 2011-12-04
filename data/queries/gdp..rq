@@ -1,0 +1,19 @@
+PREFIX fao: <http://aims.fao.org/aos/geopolitical.owl#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?country ?gdp ?population ?area
+{
+  ?s fao:codeDBPediaID ?country .
+  ?s fao:GDPUnit ?gdp_unit .
+  ?s fao:GDPTotalInCurrentPrices ?gdp .
+  ?s fao:populationUnit ?population_unit .
+  ?s fao:populationTotal ?population .
+  ?s fao:countryAreaTotal ?area .
+  ?s fao:countryAreaUnit ?area_unit .
+
+  FILTER ( ?gdp_unit = "millions of US dollars" ) .
+  FILTER ( ?population_unit = "1000" ) .
+  FILTER ( ?area_unit = "1000 Ha" ) .
+  
+}
+ORDER BY ?country

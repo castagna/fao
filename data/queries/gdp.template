@@ -1,0 +1,81 @@
+<html>
+<head>
+  <script type="text/javascript" src="http://tablesorter.com/jquery-latest.js"></script>    
+  <script type="text/javascript" src="http://autobahn.tablesorter.com/jquery.tablesorter.js"></script>
+  <link rel="stylesheet" href="http://tablesorter.com/docs/css/jq.css" type="text/css" media="print, projection, screen" />
+  <link rel="stylesheet" href="http://tablesorter.com/themes/blue/style.css" type="text/css" id="" media="print, projection, screen" />
+  <script type="text/javascript">
+$(document).ready(function() { 
+    $.tablesorter.addParser({ 
+        id: 'custom', 
+        is: function(s) { 
+            // return false so this parser is not auto detected 
+            return false; 
+        }, 
+        format: function(s) { 
+            // format your data for normalization 
+            return s.replace(/,/gi,""); 
+        }, 
+        // set type, either numeric or text 
+        type: 'numeric' 
+    });
+    $(function() { 
+        $("table").tablesorter({ 
+            widgets: ['zebra'],
+            sortList: [[0,0]],
+            headers: { 
+                1: { sorter:'custom' }, 
+                2: { sorter:'custom' }, 
+                3: { sorter:'custom' }, 
+                4: { sorter:'custom' }, 
+                5: { sorter:'custom' } 
+            } 
+        }); 
+    });       
+});
+  </script>
+  <style type="text/css">
+    td { text-align: right; }
+    td.storename { text-align: left; }
+  </style>
+
+</head>
+<body>
+
+<h1 style="text-align:center;margin-top:20px;">GDP</h1>
+
+<table class="tablesorter"  cellspacing="1"> 
+<thead>
+  <tr>
+    <th>country</th>
+    <th>gdp [$]</th>
+    <th>population</th>
+    <th>gdp per capita [$/person]</th>
+    <th>area [km&sup2;]</th>
+    <th>density [persons/km&sup2;]</th>
+  </tr>
+</thead>
+
+<tbody> 
+
+#foreach( $solution in $resultset )
+#set( $gdp = $solution.getLiteral("gdp").getFloat() * 1000000 )
+#set( $population = $solution.getLiteral("population").getFloat() * 1000 )
+#set( $gdp_per_capita = $gdp / $population )
+#set( $area = $solution.getLiteral("area").getFloat() * 10 )
+#set( $density = $population / $area )
+<tr>
+<td>$solution.getLiteral("country").getString().replaceAll("_"," ")</td>
+<td>$formatter.format( "%,.0f", $gdp )</td>
+<td>$formatter.format( "%,.0f", $population )</td>
+<td>$formatter.format( "%,.0f", $gdp_per_capita )</td>
+<td>$formatter.format( "%,.0f", $area )</td>
+<td>$formatter.format( "%,.0f", $density )</td>
+</tr>         
+#end
+
+</tbody>
+</table> 
+
+</body>
+</html>
