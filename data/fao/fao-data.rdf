@@ -4614,6 +4614,9 @@
     <codeGAUL rdf:datatype="http://www.w3.org/2001/XMLSchema#string">166</codeGAUL>
     <codeFAOTERM rdf:datatype="http://www.w3.org/2001/XMLSchema#string">19026</codeFAOTERM>
     <nationalityFR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">monégasque</nationalityFR>
+    <!-- This was missing! -->
+    <countryAreaTotal rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.198</countryAreaTotal>
+    <countryAreaUnit rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1000 Ha</countryAreaUnit>
   </rdf:Description>
   <rdf:Description rdf:about="http://aims.fao.org/aos/geopolitical.owl#Wallis_and_Futuna_Is">
     <nationalityFR rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wallisien</nationalityFR>

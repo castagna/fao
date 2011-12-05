@@ -124,7 +124,7 @@ public class Utils {
 		try {
 			if ( query.getName().endsWith(".sparql") ) {
 				File template = new File (query.getParentFile(), "sparql.vm") ;
-				File output = new File (query.getParentFile(), extension ( query.getName(), ".rq") ) ;
+				File output = new File (query.getParentFile(), extension ( query.getName(), "rq") ) ;
 				VelocityEngine ve = new VelocityEngine();
 				ve.setProperty("file.resource.loader.path", query.getParentFile().getAbsolutePath()) ;
 				ve.init();
